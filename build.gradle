@@ -9,7 +9,7 @@ plugins {
 
 
 group = mod_version
-version = mod_group_id
+version = '1.19.4.0.1'
 
 base {
     archivesName = mod_id
@@ -78,7 +78,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                "${mod_id}" {
+                shaman_king {
                     source sourceSets.main
                 }
             }

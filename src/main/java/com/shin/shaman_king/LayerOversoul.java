@@ -26,9 +26,9 @@ public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> e
     private static final ResourceLocation OVERSOUL_COLOUR_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/swordaura_colour.png");
     private static final ResourceLocation OVERSOUL_PLAIN_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/swordaura_plain.png");
 
-    public LayerOversoul(RenderLayerParent p_174493_)
+    public LayerOversoul(RenderLayerParent Parent)
     {
-        super(p_174493_);
+        super(Parent);
         modelSwordAura = new ModelSwordAura<>(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.OVERSOUL_LAYER));
     }
 

@@ -15,7 +15,6 @@ public class ModelSwordAura<T extends Entity> extends EntityModel<T> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "modelswordaura"), "main");
     private final ModelPart Base;
-
     public ModelSwordAura(ModelPart root) {
         this.Base = root.getChild("Base");
     }
@@ -27,9 +26,7 @@ public class ModelSwordAura<T extends Entity> extends EntityModel<T> {
         PartDefinition Base = partdefinition.addOrReplaceChild("Base", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         PartDefinition Shield = Base.addOrReplaceChild("Shield", CubeListBuilder.create().texOffs(27, 32).mirror().addBox(-5.0F, -3.0F, -4.0F, 1.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.0F, 0.0F, 0.4538F));
-
         PartDefinition SwordAura = Base.addOrReplaceChild("SwordAura", CubeListBuilder.create().texOffs(0, 32).mirror().addBox(-4.0F, 4.0F, -12.0F, 5.0F, 7.0F, 16.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1F, 0.0F, 0.0F));
-
         return LayerDefinition.create(meshdefinition, 56, 55);
     }
 
