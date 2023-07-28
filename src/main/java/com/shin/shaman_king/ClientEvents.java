@@ -65,18 +65,14 @@ public class ClientEvents {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onSpiritEntRender(RenderLivingEvent.Pre event) {
-        //I have used EntityMob as it relates to several different mobs. Eg Zombie, Skeleton etc.
-        event.getEntity();//I have used isInWater as an example here, because it is just a check for if we should cancel the render.
+        event.getEntity();
         if (event.getEntity().isInWater()) {
             Player player = Minecraft.getInstance().player;
             boolean cancelRender = false;
-
             assert player != null;
             if (player.getOffhandItem().getItem() == Items.APPLE) {
                 cancelRender = true;
             }
-
-            //Cancel the render so that the shadows and entity don't render
             if (cancelRender) {
                 event.setCanceled(true);
             }

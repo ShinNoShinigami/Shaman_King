@@ -34,7 +34,7 @@ public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> e
 
 
 
-    public void render(PoseStack p_117349_, MultiBufferSource p_117350_, int p_117351_, T EntityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int pPackedLight, T EntityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 
         ItemStack itemstack = EntityLivingBaseIn.getItemBySlot(EquipmentSlot.MAINHAND);
         if (shouldRender(itemstack, EntityLivingBaseIn)) {
@@ -43,13 +43,13 @@ public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> e
 
             resourcelocation = getWingsTexture(EntityLivingBaseIn);
 
-            p_117349_.pushPose();
-            p_117349_.translate(0.0F, 0.0F, 0.125F);
+            poseStack.pushPose();
+            poseStack.translate(0.0F, 0.0F, 0.125F);
             this.getParentModel().copyPropertiesTo(modelSwordAura);
             modelSwordAura.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, partialTicks, netHeadYaw, headPitch);
-            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(p_117350_, RenderType.armorCutoutNoCull(resourcelocation), false, EntityLivingBaseIn.getItemBySlot(EquipmentSlot.MAINHAND).hasFoil());
-            modelSwordAura.renderToBuffer(p_117349_, vertexconsumer, p_117351_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-            p_117349_.popPose();
+            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(multiBufferSource, RenderType.armorCutoutNoCull(resourcelocation), false, EntityLivingBaseIn.getItemBySlot(EquipmentSlot.MAINHAND).hasFoil());
+            modelSwordAura.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            poseStack.popPose();
         }
     }
     public boolean shouldRender(ItemStack stack, T entity) {
