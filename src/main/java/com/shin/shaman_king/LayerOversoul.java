@@ -2,6 +2,7 @@ package com.shin.shaman_king;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.shin.shaman_king.item.client.AmethystArmourModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -21,15 +22,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> extends RenderLayer<T, M>
 {
-    private final ModelSwordAura<T> modelSwordAura;
-    private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/swordaura.png");
-    private static final ResourceLocation OVERSOUL_COLOUR_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/swordaura_colour.png");
-    private static final ResourceLocation OVERSOUL_PLAIN_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/swordaura_plain.png");
+    private final AmethystArmourModel<T> amethystArmourModel;
+    private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/armour/amethyst_armor.png");
 
     public LayerOversoul(RenderLayerParent Parent)
     {
         super(Parent);
-        modelSwordAura = new ModelSwordAura<>(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.OVERSOUL_LAYER));
+        amethystArmourModel= new AmethystArmourModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.OVERSOUL_LAYER));
     }
 
 
@@ -45,10 +44,10 @@ public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> e
 
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.0F, 0.125F);
-            this.getParentModel().copyPropertiesTo(modelSwordAura);
-            modelSwordAura.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, partialTicks, netHeadYaw, headPitch);
+            this.getParentModel().copyPropertiesTo(amethystArmourModel);
+            amethystArmourModel.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, partialTicks, netHeadYaw, headPitch);
             VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(multiBufferSource, RenderType.armorCutoutNoCull(resourcelocation), false, EntityLivingBaseIn.getItemBySlot(EquipmentSlot.MAINHAND).hasFoil());
-            modelSwordAura.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            amethystArmourModel.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             poseStack.popPose();
         }
     }

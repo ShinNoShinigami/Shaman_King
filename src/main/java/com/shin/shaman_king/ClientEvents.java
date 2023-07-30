@@ -21,13 +21,12 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.function.Function;
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Shaman_King.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientEvents {
-    public static ModelLayerLocation OVERSOUL_LAYER = new ModelLayerLocation(new ResourceLocation("minecraft:player"), "modelswordaura");
+    public static ModelLayerLocation OVERSOUL_LAYER = new ModelLayerLocation(new ResourceLocation("minecraft:player"), "amethystarmourmodel");
     @Mod.EventBusSubscriber(modid = Shaman_King.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ModBusEvents {
         @SubscribeEvent
         public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(OVERSOUL_LAYER, ModelSwordAura::createBodyLayer);
-            System.out.println("Working?");
         }
 
         @SubscribeEvent
