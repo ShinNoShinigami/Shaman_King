@@ -1,7 +1,6 @@
 package com.shin.shaman_king.datagen;
 
 import com.shin.shaman_king.Shaman_King;
-import com.shin.shaman_king.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -18,10 +17,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(ModItems.AMETHYST_BOOTS);
-        simpleItem(ModItems.AMETHYST_HELMET);
-        simpleItem(ModItems.AMETHYST_CHESTPLATE);
-        simpleItem(ModItems.AMETHYST_LEGGINGS);
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){
         return withExistingParent(item.getId().getPath(),

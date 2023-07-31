@@ -2,7 +2,6 @@ package com.shin.shaman_king;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.shin.shaman_king.item.client.AmethystArmourModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,13 +21,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> extends RenderLayer<T, M>
 {
-    private final AmethystArmourModel<T> amethystArmourModel;
-    private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/armour/amethyst_armor.png");
+    private final ModelSwordAura<T> modelSwordAura;
+    private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/swordaura");
 
     public LayerOversoul(RenderLayerParent Parent)
     {
         super(Parent);
-        amethystArmourModel= new AmethystArmourModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.OVERSOUL_LAYER));
+        modelSwordAura= new ModelSwordAura<>(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.OVERSOUL_LAYER));
     }
 
 
@@ -40,14 +39,11 @@ public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> e
             System.out.println("should be rendering");
             ResourceLocation resourcelocation;
 
-            resourcelocation = getWingsTexture(EntityLivingBaseIn);
+            resourcelocation = getTexture(EntityLivingBaseIn);
 
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.0F, 0.125F);
-            this.getParentModel().copyPropertiesTo(amethystArmourModel);
-            amethystArmourModel.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, partialTicks, netHeadYaw, headPitch);
             VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(multiBufferSource, RenderType.armorCutoutNoCull(resourcelocation), false, EntityLivingBaseIn.getItemBySlot(EquipmentSlot.MAINHAND).hasFoil());
-            amethystArmourModel.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             poseStack.popPose();
         }
     }
@@ -55,7 +51,7 @@ public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> e
         System.out.println("Item fetched");
         return stack.getItem() == Items.DIAMOND_SWORD;
     }
-    public ResourceLocation getWingsTexture(T entity)
+    public ResourceLocation getTexture(T entity)
     {
         System.out.println("Texture fetched");
         return OVERSOUL_TEX;

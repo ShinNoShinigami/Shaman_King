@@ -16,12 +16,6 @@ description='''Mod based on the series "Shaman King"'''
    ordering="NONE"
    side="BOTH"
 [[dependencies.shaman_king]]
-modId="geckolib"
-mandatory=true
-versionRange="[4.2,)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.shaman_king]]
    modId="minecraft"
    mandatory=true
    versionRange="${minecraft_version_range}"

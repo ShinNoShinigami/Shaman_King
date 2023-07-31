@@ -1,8 +1,6 @@
 package com.shin.shaman_king;
 
 import com.mojang.logging.LogUtils;
-import com.shin.shaman_king.item.ModItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -25,7 +23,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
-import software.bernie.geckolib.GeckoLib;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Shaman_King.MOD_ID)
@@ -47,9 +44,6 @@ public class Shaman_King {
 
     public Shaman_King() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModItems.register(modEventBus);
-
-        GeckoLib.initialize();
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -66,10 +60,6 @@ public class Shaman_King {
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
         if (event.getTab() == CreativeModeTabs.COMBAT){
-            event.accept(ModItems.AMETHYST_HELMET);
-            event.accept(ModItems.AMETHYST_BOOTS);
-            event.accept(ModItems.AMETHYST_LEGGINGS);
-            event.accept(ModItems.AMETHYST_CHESTPLATE);
 
     }
     }
