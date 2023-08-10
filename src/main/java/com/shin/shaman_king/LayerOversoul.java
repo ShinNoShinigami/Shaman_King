@@ -19,10 +19,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> extends RenderLayer<T, M>
-{
+public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>, A extends HumanoidModel<T>> extends RenderLayer<T, M> {
     private final ModelSwordAura<T> modelSwordAura;
-    private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/swordaura");
+    private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/modelswordaura.png");
 
     public LayerOversoul(RenderLayerParent Parent)
     {
@@ -43,7 +42,10 @@ public class LayerOversoul <T extends LivingEntity,M extends HumanoidModel<T>> e
 
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.0F, 0.125F);
-            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(multiBufferSource, RenderType.armorCutoutNoCull(resourcelocation), false, EntityLivingBaseIn.getItemBySlot(EquipmentSlot.MAINHAND).hasFoil());
+            this.getParentModel().copyPropertiesTo(this.modelSwordAura);
+            this.modelSwordAura.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(multiBufferSource, RenderType.armorCutoutNoCull(resourcelocation), false, itemstack.hasFoil());
+            this.modelSwordAura.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             poseStack.popPose();
         }
     }
