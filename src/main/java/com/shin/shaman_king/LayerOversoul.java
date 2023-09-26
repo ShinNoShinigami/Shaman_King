@@ -19,7 +19,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>, A extends HumanoidModel<T>> extends RenderLayer<T, M> {
+public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
     private final ModelSwordAura<T> modelSwordAura;
     private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/modelswordaura.png");
 
@@ -34,10 +34,10 @@ public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>, 
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int pPackedLight, T EntityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 
         ItemStack itemstack = EntityLivingBaseIn.getItemBySlot(EquipmentSlot.OFFHAND);
-        if (shouldRender(itemstack, EntityLivingBaseIn)) {
+        if (shouldRender(itemstack)) {
             ResourceLocation resourcelocation;
 
-            resourcelocation = getTexture(EntityLivingBaseIn);
+            resourcelocation = getTexture();
 
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.0F, 0.0F);
@@ -48,10 +48,10 @@ public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>, 
             poseStack.popPose();
         }
     }
-    public boolean shouldRender(ItemStack stack, T entity) {
+    public boolean shouldRender(ItemStack stack) {
         return stack.getItem() == Items.DIAMOND_SWORD;
     }
-    public ResourceLocation getTexture(T entity)
+    public ResourceLocation getTexture()
     {
         return OVERSOUL_TEX;
     }
