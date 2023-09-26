@@ -24,6 +24,7 @@ public class ClientEvents {
     public static ModelLayerLocation OVERSOUL_LAYER = new ModelLayerLocation(new ResourceLocation("minecraft:player"), "modelswordaura");
     @Mod.EventBusSubscriber(modid = Shaman_King.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ModBusEvents {
+
         @SubscribeEvent
         public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(OVERSOUL_LAYER, ModelSwordAura::createBodyLayer);

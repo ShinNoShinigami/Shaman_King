@@ -38,7 +38,7 @@ public class ModelSwordAura<T extends LivingEntity> extends HumanoidModel<T> {
 	}
 
 	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
+		MeshDefinition meshdefinition = HumanoidModel.createMesh(new CubeDeformation(0.5f), 0f);
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
@@ -92,6 +92,7 @@ public class ModelSwordAura<T extends LivingEntity> extends HumanoidModel<T> {
 		this.LeftArm.copyFrom(this.leftArm);
 		this.RightArm.copyFrom(this.rightArm);
 		this.Body.copyFrom(this.body);
+		this.Head.copyFrom(this.head);
 	}
 
 }
