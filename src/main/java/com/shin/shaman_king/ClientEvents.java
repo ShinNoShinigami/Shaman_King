@@ -69,6 +69,7 @@ public class ClientEvents {
             }
             if (cancelRender) {
                 event.setCanceled(true);
+                System.out.println("A");
             }
         }
     }
