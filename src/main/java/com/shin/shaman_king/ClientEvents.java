@@ -1,7 +1,6 @@
 package com.shin.shaman_king;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -21,13 +20,13 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.function.Function;
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Shaman_King.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientEvents {
-    public static ModelLayerLocation OVERSOUL_LAYER = new ModelLayerLocation(new ResourceLocation("minecraft:player"), "modelswordaura");
+    public static ModelLayerLocation OVERSOUL_LAYER = new ModelLayerLocation(new ResourceLocation("minecraft:player"), "testoversoul");
     @Mod.EventBusSubscriber(modid = Shaman_King.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ModBusEvents {
 
         @SubscribeEvent
         public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(OVERSOUL_LAYER, ModelSwordAura::createBodyLayer);
+            event.registerLayerDefinition(OVERSOUL_LAYER, TestOversoul::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -56,11 +55,6 @@ public class ClientEvents {
             if (renderer != null) renderer.addLayer(factory.apply(renderer));
         }
 
-        private static <E extends LivingEntity, M extends EntityModel<E>>
-        void addLayerToLiving(EntityRenderersEvent.AddLayers event, EntityType<E> entityType, Function<LivingEntityRenderer<E, M>, ? extends RenderLayer<E, M>> factory) {
-            LivingEntityRenderer<E, M> renderer = event.getRenderer(entityType);
-            if (renderer != null) renderer.addLayer(factory.apply(renderer));
-        }
     }
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent

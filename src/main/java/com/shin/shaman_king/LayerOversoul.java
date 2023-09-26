@@ -20,13 +20,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
-    private final ModelSwordAura<T> modelSwordAura;
-    private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/modelswordaura.png");
+    private final TestOversoul<T> testOversoul;
+    private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MOD_ID, "textures/testoversoul.png");
 
     public LayerOversoul(RenderLayerParent Parent)
     {
         super(Parent);
-        modelSwordAura= new ModelSwordAura<>(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.OVERSOUL_LAYER));
+        testOversoul = new TestOversoul<>(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.OVERSOUL_LAYER));
     }
 
 
@@ -41,10 +41,10 @@ public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>> 
 
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.0F, 0.0F);
-            this.getParentModel().copyPropertiesTo(this.modelSwordAura);
-            this.modelSwordAura.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            this.getParentModel().copyPropertiesTo(this.testOversoul);
+            this.testOversoul.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(multiBufferSource, RenderType.armorCutoutNoCull(resourcelocation), false, itemstack.hasFoil());
-            this.modelSwordAura.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            this.testOversoul.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             poseStack.popPose();
         }
     }

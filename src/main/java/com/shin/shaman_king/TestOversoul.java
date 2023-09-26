@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelSwordAura<T extends LivingEntity> extends HumanoidModel<T> {
+public class TestOversoul<T extends LivingEntity> extends HumanoidModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	//public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "modelswordaura"), "main");
 	private final ModelPart Head;
@@ -25,7 +25,7 @@ public class ModelSwordAura<T extends LivingEntity> extends HumanoidModel<T> {
 	private final ModelPart RightLeg;
 	private final ModelPart LeftLeg;
 
-	public ModelSwordAura(ModelPart root) {
+	public TestOversoul(ModelPart root) {
 		super(root, RenderType::entityTranslucent);
 		this.Head = root.getChild("head");
 		this.Body = root.getChild("body");
