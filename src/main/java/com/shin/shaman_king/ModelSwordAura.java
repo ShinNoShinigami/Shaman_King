@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,7 +39,7 @@ public class ModelSwordAura<T extends LivingEntity> extends HumanoidModel<T> {
 	}
 
 	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = HumanoidModel.createMesh(new CubeDeformation(0.5f), 0f);
+		MeshDefinition meshdefinition = HumanoidModel.createMesh(new CubeDeformation(0.0f), 0f);
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
@@ -87,6 +88,8 @@ public class ModelSwordAura<T extends LivingEntity> extends HumanoidModel<T> {
 	@Override
 	public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 		super.setupAnim(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+		this.crouching = pEntity.isCrouching();
+		this.swimAmount = pEntity.getSwimAmount(pAgeInTicks);
 		this.LeftLeg.copyFrom(this.leftLeg);
 		this.RightLeg.copyFrom(this.rightLeg);
 		this.LeftArm.copyFrom(this.leftArm);

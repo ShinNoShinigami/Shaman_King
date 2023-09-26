@@ -33,15 +33,14 @@ public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>, 
 
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int pPackedLight, T EntityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 
-        ItemStack itemstack = EntityLivingBaseIn.getItemBySlot(EquipmentSlot.MAINHAND);
+        ItemStack itemstack = EntityLivingBaseIn.getItemBySlot(EquipmentSlot.OFFHAND);
         if (shouldRender(itemstack, EntityLivingBaseIn)) {
-            System.out.println("should be rendering");
             ResourceLocation resourcelocation;
 
             resourcelocation = getTexture(EntityLivingBaseIn);
 
             poseStack.pushPose();
-            poseStack.translate(0.0F, 0.0F, 0.125F);
+            poseStack.translate(0.0F, 0.0F, 0.0F);
             this.getParentModel().copyPropertiesTo(this.modelSwordAura);
             this.modelSwordAura.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(multiBufferSource, RenderType.armorCutoutNoCull(resourcelocation), false, itemstack.hasFoil());
@@ -50,12 +49,10 @@ public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>, 
         }
     }
     public boolean shouldRender(ItemStack stack, T entity) {
-        System.out.println("Item fetched");
         return stack.getItem() == Items.DIAMOND_SWORD;
     }
     public ResourceLocation getTexture(T entity)
     {
-        System.out.println("Texture fetched");
         return OVERSOUL_TEX;
     }
 
