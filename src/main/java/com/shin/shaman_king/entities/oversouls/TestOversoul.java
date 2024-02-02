@@ -1,4 +1,4 @@
-package com.shin.shaman_king;
+package com.shin.shaman_king.entities.oversouls;
 
 
 import com.google.common.collect.ImmutableList;
@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class TestOversoul<T extends LivingEntity> extends HumanoidModel<T> {
@@ -63,30 +64,30 @@ public class TestOversoul<T extends LivingEntity> extends HumanoidModel<T> {
 
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		Head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		LeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, 0, 0, 1, alpha);
 	}
 
 	@Override
-	protected Iterable<ModelPart> headParts() {
+	protected @NotNull Iterable<ModelPart> headParts() {
 		return ImmutableList.of(this.Head);
 	}
 
 	@Override
-	protected Iterable<ModelPart> bodyParts() {
+	protected @NotNull Iterable<ModelPart> bodyParts() {
 		return Iterables.concat(super.bodyParts(), ImmutableList.of(this.Body, this.RightArm, this.LeftArm, this.RightLeg, this.LeftLeg));
 	}
 
 	@Override
-	public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-		super.setupAnim(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+	public void setupAnim(@NotNull T pEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pNetHeadYaw, float pHeadPitch) {
+		super.setupAnim(pEntity, pLimbSwing, pLimbSwingAmount, pPartialTicks, pNetHeadYaw, pHeadPitch);
 		this.crouching = pEntity.isCrouching();
-		this.swimAmount = pEntity.getSwimAmount(pAgeInTicks);
+		this.swimAmount = pEntity.getSwimAmount(pLimbSwingAmount);
 		this.LeftLeg.copyFrom(this.leftLeg);
 		this.RightLeg.copyFrom(this.rightLeg);
 		this.LeftArm.copyFrom(this.leftArm);
