@@ -34,7 +34,7 @@ public class Overlay {
         int FuryokuBar = (int) ((1 - (Furyoku / MaxFuryoku)) * 64);
         int OSPBar = (int) ((1 - (OSP / MaxFuryoku)) * 64);
         int MaxOSPBar = (int) (32 - ((MaxOSP / MaxFuryoku) * 64));
-        boolean OB2021 = true;
+        boolean OB2021 = entity.getMainHandItem().getItem() != Items.APPLE;
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
@@ -47,7 +47,7 @@ public class Overlay {
         event.getGuiGraphics().blit(ORACLE_BELL_OVERLAY, 27, h / 2 - 32, 87, 0, 5, OSPBar);
         event.getGuiGraphics().blit(ORACLE_BELL_OVERLAY, 11, h / 2 + 38, 41, 19, 32, 22);
         event.getGuiGraphics().blit(ORACLE_BELL_OVERLAY, 27, h / 2 + MaxOSPBar, 100, 65, 5, 5);
-        if (entity.getMainHandItem().getItem() == Items.APPLE){
+        if (OB2021){
             event.getGuiGraphics().blit(ORACLE_BELL_OVERLAY, 3, h / 2 - 52, 33, 0, 46, 18);
         }
         else{

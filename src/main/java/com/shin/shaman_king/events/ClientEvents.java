@@ -46,6 +46,7 @@ public class ClientEvents {
     }
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
+    @SuppressWarnings("rawtypes")
     public void onSpiritEntRender(RenderLivingEvent.Pre event) {
         if (event.getEntity().isInWater() && event.getEntity() instanceof ISpirits) {
             Player player = Minecraft.getInstance().player;
@@ -59,7 +60,8 @@ public class ClientEvents {
                 System.out.println("A");
             }
         }
-    }/*
+    }
+    /*
     @SubscribeEvent
     public void onSpiritEntHurt(LivingAttackEvent event){
         if (event.getEntity() instanceof ISpirits){

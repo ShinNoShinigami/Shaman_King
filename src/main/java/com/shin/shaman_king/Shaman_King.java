@@ -1,9 +1,15 @@
 package com.shin.shaman_king;
 
+import com.shin.shaman_king.entities.ShamanKingEntities;
+import com.shin.shaman_king.entities.renderer.MorphinTest;
 import com.shin.shaman_king.events.ClientEvents;
+import com.shin.shaman_king.items.ShamanKingItems;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -43,6 +49,9 @@ public class Shaman_King {
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ClientEvents());
+        ShamanKingItems.register(modEventBus);
+        ShamanKingEntities.register(modEventBus);
+
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -94,7 +103,7 @@ public class Shaman_King {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
+            EntityRenderers.register(ShamanKingEntities.MORPHIN_PENDULUM.get(), MorphinTest::new);
         }
     }
 }
