@@ -37,7 +37,7 @@ public class AASAProcedure {
 			if(SpiritType == 100){
 				int ReiVal = r.nextInt(1000000)+100000;
 				itemstack.getOrCreateTag().putString("Spirit Type", "Kami");
-				itemstack.getOrCreateTag().putDouble("Reiryoku", 50);
+				itemstack.getOrCreateTag().putDouble("Reiryoku", ReiVal);
 			}
 			else if (SpiritType >= 90){
 				itemstack.getOrCreateTag().putString("Spirit Type", "Seireitei");
