@@ -53,8 +53,6 @@ public class Overlay {
         else{
             event.getGuiGraphics().blit(ORACLE_BELL_OVERLAY, 11, h / 2 - 53, 41, 42, 30, 15);
         }
-        event.getGuiGraphics().drawString(Minecraft.getInstance().font, Furyoku + " " + OBRed + " " + OBGreen + " " + OBBlue, w / 2  -180, h / 2  -94, -1, false);
-
         RenderSystem.setShaderColor((float) OBRed, (float) OBGreen, (float) OBBlue, 1);
         event.getGuiGraphics().blit(ORACLE_BELL_OVERLAY, 10, h / 2 - 38, 0, 0, 32, 76);
     }

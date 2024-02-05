@@ -31,7 +31,6 @@ public class MorphinTest extends EntityRenderer<MorphinProjectile> {
         super(pContext);
     }
 
-
     public void render(MorphinProjectile pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
         Player player = pEntity.getPlayerOwner();
         if (player != null) {
@@ -131,4 +130,3 @@ public class MorphinTest extends EntityRenderer<MorphinProjectile> {
         return TEXTURE_LOCATION;
     }
 }
-

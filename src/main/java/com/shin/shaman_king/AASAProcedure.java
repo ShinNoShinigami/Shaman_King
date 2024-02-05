@@ -1,10 +1,17 @@
 package com.shin.shaman_king;
 
 import com.shin.shaman_king.network.ShamanKingVariables;
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,16 +31,17 @@ public class AASAProcedure {
 	}
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		{
-			double rangeMin = 0.0f;
-			double rangeMax = 1.0f;
-			Random r = new Random();
 			entity.getCapability(ShamanKingVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 				capability.Furyoku = 5;
-				capability.OBRed = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
-				capability.OBBlue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
-				capability.OBGreen = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
 				capability.syncPlayerVariables(entity);
 			});
+		}
+	}
+	@SubscribeEvent
+	public static void onEntityDeath(LivingDeathEvent event){
+		if (event.getEntity() instanceof Blaze){
+			((Blaze) event.getEntity()).captureDrops();
+
 		}
 	}
 }

@@ -27,6 +27,7 @@ import net.minecraft.client.Minecraft;
 import com.shin.shaman_king.Shaman_King;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Random;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -108,14 +109,17 @@ public class ShamanKingVariables {
     }
 
     public static class PlayerVariables {
+        double rangeMin = 0.0f;
+        double rangeMax = 1.0f;
+        Random r = new Random();
         public double MaxFuryoku = 100;
         public double Furyoku = 0;
         public double MaxOSP = 10;
         public double OSP = 0;
         public double Reiryoku = 0;
-        public double OBRed = 1;
-        public double OBGreen = 1;
-        public double OBBlue = 1;
+        public double OBRed = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
+        public double OBGreen = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
+        public double OBBlue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
 
         public void syncPlayerVariables(Entity entity) {
             if (entity instanceof ServerPlayer serverPlayer)

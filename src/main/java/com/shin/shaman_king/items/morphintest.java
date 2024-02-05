@@ -30,7 +30,9 @@ public class morphintest extends Item implements Vanishable {
         }
         else {
             if (!pLevel.isClientSide) {
-                pLevel.addFreshEntity(new MorphinProjectile(pPlayer, pLevel));
+                int x = 1;
+                int y = 2;
+                pLevel.addFreshEntity(new MorphinProjectile(pPlayer, pLevel, x, y));
             }
         }
 
