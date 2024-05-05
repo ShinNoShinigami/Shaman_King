@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -55,5 +56,7 @@ public class Overlay {
         }
         RenderSystem.setShaderColor((float) OBRed, (float) OBGreen, (float) OBBlue, 1);
         event.getGuiGraphics().blit(ORACLE_BELL_OVERLAY, 10, h / 2 - 38, 0, 0, 32, 76);
+        //event.getGuiGraphics().drawString(Minecraft.getInstance().font,ShamanKingVariables.MapVariables.get().test , w / 2 + -213, h / 2 + -120, -1, false);
+
     }
 }

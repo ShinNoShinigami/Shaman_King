@@ -105,8 +105,8 @@ public class MorphinTest extends EntityRenderer<MorphinProjectile> {
         return (float)pNumerator / (float)pDenominator;
     }
 
-    private static void vertex(VertexConsumer pConsumer, Matrix4f p_254085_, Matrix3f p_253962_, int pLightmapUV, float pX, int pY, int pU, int pV) {
-        pConsumer.vertex(p_254085_, pX - 0.5F, (float)pY - 0.5F, 0.0F).color(255, 255, 255, 255).uv((float)pU, (float)pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(pLightmapUV).normal(p_253962_, 0.0F, 1.0F, 0.0F).endVertex();
+    private static void vertex(VertexConsumer pConsumer, Matrix4f matrix4f, Matrix3f matrix3f, int pLightmapUV, float pX, int pY, int pU, int pV) {
+        pConsumer.vertex(matrix4f, pX - 0.5F, (float)pY - 0.5F, 0.0F).color(255, 255, 255, 255).uv((float)pU, (float)pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(pLightmapUV).normal(matrix3f, 0.0F, 1.0F, 0.0F).endVertex();
     }
 
     private static void stringVertex(float p_174119_, float p_174120_, float p_174121_, VertexConsumer pConsumer, PoseStack.Pose pPose, float p_174124_, float p_174125_) {

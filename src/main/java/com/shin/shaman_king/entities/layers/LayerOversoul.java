@@ -3,8 +3,8 @@ package com.shin.shaman_king.entities.layers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.shin.shaman_king.Shaman_King;
-import com.shin.shaman_king.entities.oversouls.TestOversoul;
-import com.shin.shaman_king.events.ClientEvents;
+import com.shin.shaman_king.entities.models.oversouls.TestOversoul;
+import com.shin.shaman_king.events.LayerEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,14 +22,14 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
+public class LayerOversoul<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
     private final TestOversoul<T> testOversoul;
     private static final ResourceLocation OVERSOUL_TEX = new ResourceLocation(Shaman_King.MODID, "textures/testoversoul.png");
 
     public LayerOversoul(RenderLayerParent Parent)
     {
         super(Parent);
-        testOversoul = new TestOversoul<>(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.OVERSOUL_LAYER));
+        testOversoul = new TestOversoul<>(Minecraft.getInstance().getEntityModels().bakeLayer(LayerEvents.OVERSOUL_LAYER));
     }
 
 
@@ -39,15 +39,14 @@ public class LayerOversoul <T extends LivingEntity, M extends HumanoidModel<T>> 
         ItemStack itemstack = EntityLivingBaseIn.getItemBySlot(EquipmentSlot.MAINHAND);
         if (shouldRender(itemstack)) {
             ResourceLocation resourcelocation;
-
             resourcelocation = getTexture();
-
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.0F, 0.0F);
+            poseStack.scale(1f, 1f, 1f);
             this.getParentModel().copyPropertiesTo(this.testOversoul);
             this.testOversoul.setupAnim(EntityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(multiBufferSource, RenderType.armorCutoutNoCull(resourcelocation), false, itemstack.hasFoil());
-            this.testOversoul.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 0.0F, 0.0F, 1.0F);
+            this.testOversoul.renderToBuffer(poseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             poseStack.popPose();
         }
     }

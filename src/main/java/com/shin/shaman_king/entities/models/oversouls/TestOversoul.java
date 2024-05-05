@@ -1,16 +1,20 @@
-package com.shin.shaman_king.entities.oversouls;
+package com.shin.shaman_king.entities.models.oversouls;
 
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.shin.shaman_king.network.ShamanKingVariables;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -61,27 +65,20 @@ public class TestOversoul<T extends LivingEntity> extends HumanoidModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
-
-
 	@Override
-	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		RightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		LeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, 0, 0, 1, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		Player player = Minecraft.getInstance().player;
+		boolean CanSeeSpirit = player.getCapability(ShamanKingVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new ShamanKingVariables.PlayerVariables()).CanSeeSpirits;
+		if(CanSeeSpirit) {
+			Head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+			Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+			RightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+			LeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+			RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+			LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		}
 	}
 
-	@Override
-	protected @NotNull Iterable<ModelPart> headParts() {
-		return ImmutableList.of(this.Head);
-	}
-
-	@Override
-	protected @NotNull Iterable<ModelPart> bodyParts() {
-		return Iterables.concat(super.bodyParts(), ImmutableList.of(this.Body, this.RightArm, this.LeftArm, this.RightLeg, this.LeftLeg));
-	}
 
 	@Override
 	public void setupAnim(@NotNull T pEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pNetHeadYaw, float pHeadPitch) {
